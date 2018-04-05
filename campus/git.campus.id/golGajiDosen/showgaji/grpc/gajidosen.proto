@@ -1,0 +1,42 @@
+syntax="proto3";
+
+import "google/protobuf/empty.proto";
+
+package grpc;
+
+message AddGajiDosenReq{
+    string KdGGDosen = 1;
+    string JumlahGaji =2;
+    string Keterangan = 3;
+    int32 Status = 4;
+    string CreateBy = 5;
+    string CreateOn = 6;
+    string UpdateBy = 7;
+    string UpdateOn = 8; 
+}  
+
+message ReadGajiDosenByKdGGDosenReq{
+    string KdGGDosen = 1;
+}
+ 
+message ReadGajiDosenByKdGGDosenResp{
+    string KdGGDosen = 1;
+    string JumlahGaji =2;
+    string Keterangan = 3;
+    int32 Status = 4;
+    string CreateBy = 5;
+    string CreateOn = 6;
+    string UpdateBy = 7;
+    string UpdateOn = 8;  
+}
+
+message ReadGajiDosenResp{ 
+    repeated ReadGajiDosenByKdGGDosenResp allGajiDosen = 1;
+}
+
+
+service GajiDosenService{
+    rpc AddGajiDosen(AddGajiDosenReq) returns (google.protobuf.Empty) {};
+    rpc ReadGajiDosenByKdGGDosen(ReadGajiDosenByKdGGDosenReq) returns (ReadGajiDosenByKdGGDosenResp) {};
+    rpc ReadGajiDosen(google.protobuf.Empty) returns (ReadGajiDosenResp){};
+}  

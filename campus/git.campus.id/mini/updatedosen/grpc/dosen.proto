@@ -1,0 +1,41 @@
+syntax="proto3";
+
+import "google/protobuf/empty.proto";
+
+package grpc;
+ 
+message AddDosenReq{
+    string KdDosen = 1;
+    string NamaDosen = 2;
+    int32 Status = 3;
+    string CreateBy = 4; 
+}  
+
+message ReadDosenByKdDosenReq{
+    string KdDosen = 1;
+}
+ 
+message ReadDosenByKdDosenResp{
+    string KdDosen = 1;
+    string NamaDosen=2;
+    int32 Status=3;
+    string CreateBy = 4;
+}
+
+message ReadDosenResp{
+    repeated ReadDosenByKdDosenResp allDosen = 1;
+}
+
+message UpdateDosenReq{
+    string KdDosen = 1;
+    string NamaDosen=2;
+    int32 Status=3; 
+    string UpdateBy = 4;
+}
+
+service DosenService{
+    rpc AddDosen(AddDosenReq) returns (google.protobuf.Empty) {};
+    rpc ReadDosenByKdDosen(ReadDosenByKdDosenReq) returns (ReadDosenByKdDosenResp) {};
+    rpc ReadDosen(google.protobuf.Empty) returns (ReadDosenResp){};
+    rpc UpdateDosen(UpdateDosenReq) returns (google.protobuf.Empty){}; 
+}
